@@ -1,0 +1,24 @@
+{
+  "name": "pokemon-challenge",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/pokemon-challenge/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "pokemon-challenge:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "pokemon-challenge:build:development"
+        },
+        "production": {
+          "buildTarget": "pokemon-challenge:build:production"
+        }
+      }
+    }
+  }
+}
