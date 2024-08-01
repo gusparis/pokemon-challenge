@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug API",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "nx run api:serve",
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${workspaceFolder}/apps/api/*",
+        "webpack:///../../libs/*": "${workspaceFolder}/libs/*"
+      }
+    }
+  ]
+}

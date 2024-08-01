@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pokemon
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    ports:
+      - '5432:5432'
+
+  api:
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    container_name: api
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: pokemon
+      JWT_SECRET: w:GKieOh3BYfg=e1£S3K|:wGWsfW!£
+    depends_on:
+      - postgres
+    ports:
+      - '3000:3000'
+
+  ui:
+    build:
+      context: .
+      dockerfile: ./apps/ui/Dockerfile
+    container_name: ui
+    ports:
+      - '4200:4200'
+    depends_on:
+      - api
